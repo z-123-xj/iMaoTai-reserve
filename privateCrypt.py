@@ -40,9 +40,8 @@ def decrypt_aes_ecb(ciphertext, key):
     """
     ciphertext = base64.b64decode(ciphertext)
     cipher = AES.new(key, AES.MODE_ECB)
-    plain_str = unpad(cipher.decrypt(ciphertext), AES.block_size)
-    return plain_str.decode()
-
+    plain_str = cipher.decrypt(ciphertext)
+    return plain_str.decode('latin1').strip()  # 使用 latin1 字符集解码字节字符串
 
 '''
 def encrypt_aes_cbc(plain_str, key):
